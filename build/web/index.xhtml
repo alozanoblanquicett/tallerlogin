@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Facelet Title</title>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <h:outputStylesheet library="css" name="bootstrap.min.css"  />
+        <h:outputStylesheet library="css" name="personalLogin.css"  />
+    </h:head>
+    <h:body>
+        <div class="main">
+            <div class="container">
+                <center>
+                    <div class="middle">
+                        <div id="login">
+                            <h:form>
+                                <p:growl id="msnLogin" showDetail="true" sticky="true" />
+                                <fieldset class="clearfix">
+                                    <h:panelGrid id="panelLogin" columns="1" cellpadding="5">
+                                        <h:inputText id="username" value="#{loginBean.acceso.usuario}" 
+                                                     required="true" label="username" h:placeHolder="Username" />
+                                        <h:inputSecret id="password" value="#{loginBean.acceso.passwd}" 
+                                                       required="true" label="password" />
+                                        <div>
+                                            <a class="small-text" href="#" style="color: white;">
+                                                Forgot password?</a>
+                                            <h:commandButton value="Login" action="#{loginBean.login()}"/>
+                                        </div>
+                                    </h:panelGrid>
+                                </fieldset>
+                            </h:form>
+                        </div>
+                        <div class="logo">
+                            <h:graphicImage library="images" name="logo.jpeg" class="card-img-top" />
+                        </div>
+                    </div>
+                </center>
+            </div>
+        </div>
+
+        <h:outputScript library="query" name="popper.min.js"  />
+        <h:outputScript library="query" name="bootstrap.min.js"  />
+    </h:body>
+</html>
+

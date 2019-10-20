@@ -1,0 +1,92 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <h:outputStylesheet library="css" name="bootstrap.min.css"  />
+    </h:head>
+    <h:body>
+
+        #{loginBean.validarSesion()}
+        <h:form id="albert">
+            <!-- menu para cerrar sesion -->
+            <p:accordionPanel>
+                <p:tab title="Session Login - #{loginBean.acceso.usuario}">
+                    <h:form>
+                        <h:panelGrid columns="2" cellpadding="10">
+                            <h:outputText value="#{loginBean.acceso.usuario}" />
+                            <h:commandButton value="Salir" action="#{loginBean.salir()}"  class="btn btn-danger"/>
+                        </h:panelGrid>
+                    </h:form>
+                </p:tab>
+            </p:accordionPanel>
+
+            <!-- creando la tienda tienda -->
+            <div class="container">
+                <div class="row">
+                    <ui:repeat var="item" value="#{loginBean.list}"> 
+                        <div class="col-sm">
+                            <div class="card" style="width: 18rem; padding: 5px; margin: 10px;">
+                                <h:graphicImage library="images" name="noimagen.png" class="card-img-top" />
+                                <div class="card-body">
+                                    <h5 class="card-title">Card title #{item.usuario} </h5>
+                                    <p class="card-text">Some quick example text to build on 
+                                        the card title and make up the bulk of the card's content. #{item.passwd} </p>
+                                        <p:commandLink   update=":lozano:albertDetail" value="Detalle"  
+                                                    onclick="$('#exampleModal').modal({backdrop: 'static', keyboard: true});"
+                                                    class="btn btn-success" >
+                                        <f:setPropertyActionListener value="#{item}" target="#{loginBean.seleccionar}" />
+                                    </p:commandLink>
+                                </div>
+                            </div>
+                        </div>
+                    </ui:repeat>
+                </div>
+            </div>
+        </h:form> 
+
+        <h:form id="lozano">
+            <!-- Modal ..........................................-->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" 
+                 aria-labelledby="exampleModalLabel" aria-hidden="true"> 
+                <div class="modal-dialog" role="document" style=" width:21rem;">
+                    <div class="modal-content">
+                        <h:panelGrid id="albertDetail" rendered="#{not empty loginBean.seleccionar}">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Mi modal Prueba #{loginBean.seleccionar.usuario}</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="card">
+                                    <h:graphicImage library="images" name="noimagen.png" class="card-img-top" />
+                                    <div class="card-body">
+                                        <h5 class="card-title">Card title #{loginBean.seleccionar.usuario} </h5>
+                                        <p class="card-text">Some quick example text to build on 
+                                            the card title and make up the bulk of the card's content. #{loginBean.seleccionar.passwd} </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </h:panelGrid>
+                    </div>
+                </div>
+            </div>
+        </h:form>
+
+
+        <h:outputScript library="query" name="popper.min.js"  />
+        <h:outputScript library="query" name="bootstrap.min.js"  />
+    </h:body>
+</html>
+
